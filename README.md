@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Cryptocurrency Orderbook Viewer  
 
-First, run the development server:
+A real-time cryptocurrency orderbook viewer built with Next.js v15. This project provides a live orderbook, market indicators, and market depth visualizations for trading pairs like BTC-USD, ETH-USD, and XRP-USD.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features  
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Real-time Orderbook**: Displays the top 10 levels of bids and asks for the selected trading pair.  
+- **Spread Indicator**: A rolling 1-minute chart visualizing the price spread.  
+- **Orderbook Imbalance**: Highlights the imbalance between bids and asks.  
+- **Market Depth Chart**: A snapshot of the current market depth.  
+- **Trading Pair Selector**: Switch between trading pairs (BTC-USD, ETH-USD, XRP-USD).  
+- **Responsive Design**: Optimized for mobile and desktop devices.  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Technologies  
 
-To learn more about Next.js, take a look at the following resources:
+### Framework  
+- **Next.js v15**: Leveraging the app directory for routing and server-side rendering.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Libraries  
+- **React-Chartjs-2**: Wrapper for Chart.js, used to create dynamic visualizations.  
+- **Chart.js**: Core library for rendering charts.  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Styling  
+- **Tailwind CSS**: Utility-first CSS framework for responsive design.  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Installation  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites  
+- **Node.js**: Ensure you are using a version `^18.18.0 || ^19.8.0 || >= 20.0.0`.  
+
+### Steps  
+
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/your-username/crypto-orderbook-viewer.git  
+   cd crypto-orderbook-viewer  
+   ```  
+
+2. Install dependencies:  
+   ```bash  
+   npm install  
+   ```  
+
+3. Start the development server:  
+   ```bash  
+   npm run dev  
+   ```  
+
+4. Open your browser at:  
+   ```
+   http://localhost:3000  
+   ```  
+
+---
+
+## File Structure  
+
+```  
+app/  
+├── loading.js                 // Displays a loading spinner  
+├── page.js                    // Server-side rendering of the main page  
+├── components/  
+│   ├── OrderBook.js           // Displays real-time orderbook data  
+│   ├── SpreadIndicator.js     // Visualizes the spread  
+│   ├── MarketDepthChart.js    // Line chart for market depth  
+│   ├── OrderbookImbalance.js  // Shows orderbook imbalance  
+│   └── OrderBookClient.js     // Client-side logic for WebSocket and state management  
+utils/  
+└── websocket.js               // WebSocket utility for real-time data 
+```  
+
+---
+
+## Assumptions  
+
+- WebSocket connections fetch real-time data for trading pairs from a free and demo-compatible API.  
+- Tailwind CSS is used for styling, ensuring consistency and responsiveness.  
+- Default trading pairs include **BTC-USD**, **ETH-USD**, and **XRP-USD**, but the application can be extended.
+- The imbalance between bids and asks is calculated as:
+  Imbalance = (Total Bids - Total Asks) / (Total Bids + Total Asks)  
+  Where:
+  Total Bids = Sum of all bid amounts in the top 10 levels.
+  Total Asks = Sum of all ask amounts in the top 10 levels.
+- The price spread is calculated as:
+  Spread = Best Ask Price - Best Bid Price  
+  Where:
+  Best Ask Price = Lowest price in the asks.
+  Best Bid Price = Highest price in the bids.
+
+---
+
